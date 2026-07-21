@@ -1,11 +1,12 @@
 const { EmbedBuilder } = require('discord.js');
 const config = require('../config');
 
-const createEmbed = ({ title, description, color = config.accentColor }) => {
-  const embed = new EmbedBuilder().setColor(color).setTimestamp();
+const createEmbed = ({ title, description, color = config.accentColor, timestamp = true }) => {
+  const embed = new EmbedBuilder().setColor(color);
 
   if (title) embed.setTitle(title);
   if (description) embed.setDescription(description);
+  if (timestamp) embed.setTimestamp();
 
   return embed;
 };

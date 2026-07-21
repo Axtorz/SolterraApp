@@ -73,7 +73,7 @@ async function sendJoinMessage(member) {
   const embed = createEmbed({
     description: `🛬 **Welcome <@${member.id}> to ${escapeMarkdown(member.guild.name)}!** 🎉`,
     color: config.successColor,
-  }).setThumbnail(member.user.displayAvatarURL({ size: 256 }));
+  });
 
   try {
     await channel.send({ embeds: [embed] });
@@ -91,7 +91,7 @@ async function sendLeaveMessage(member) {
   const embed = createEmbed({
     description: `🛫 **${displayName}** has left **${guildName}**.`,
     color: config.errorColor,
-  }).setThumbnail(member.user.displayAvatarURL({ size: 256 }));
+  });
 
   try {
     await channel.send({ embeds: [embed] });

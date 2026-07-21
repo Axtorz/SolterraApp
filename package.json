@@ -1,0 +1,28 @@
+{
+  "name": "solterra-discord-bot",
+  "version": "1.0.0",
+  "description": "Production-ready Discord bot for the Solterra Minecraft community.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy": "node scripts/deploy-commands.js",
+    "check": "node scripts/validate-project.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "discord",
+    "discord-bot",
+    "discord.js",
+    "minecraft",
+    "solterra"
+  ],
+  "author": "Axtorz",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "14.27.0",
+    "dotenv": "17.4.2"
+  }
+}

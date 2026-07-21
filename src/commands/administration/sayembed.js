@@ -6,6 +6,7 @@ const {
 const { validateDestinationChannel } = require('../../utils/channelPermissions');
 const { parseEmbedColor } = require('../../utils/colors');
 const { createEmbed, successEmbed } = require('../../utils/embeds');
+const { expandNewlines } = require('../../utils/formatters');
 const logger = require('../../utils/logger');
 const { replyWithEmbed, replyWithError } = require('../../utils/responses');
 
@@ -89,7 +90,7 @@ module.exports = {
 
   async execute(interaction) {
     const channel = interaction.options.getChannel('channel', true);
-    const description = interaction.options.getString('description', true);
+    const description = expandNewlines(interaction.options.getString('description', true));
     const title = interaction.options.getString('title')?.trim();
     const colorInput = interaction.options.getString('color');
     const includeTimestamp = interaction.options.getBoolean('timestamp') ?? false;

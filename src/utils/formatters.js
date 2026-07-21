@@ -47,4 +47,8 @@ function formatLoadAverage() {
   return load.map((value) => value.toFixed(2)).join(' / ');
 }
 
-module.exports = { formatBytes, formatDuration, formatLoadAverage, truncate };
+function expandNewlines(value) {
+  return String(value ?? '').replace(/\\n/g, '\n');
+}
+
+module.exports = { expandNewlines, formatBytes, formatDuration, formatLoadAverage, truncate };

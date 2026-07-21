@@ -5,6 +5,7 @@ const {
 } = require('discord.js');
 const { validateDestinationChannel } = require('../../utils/channelPermissions');
 const { successEmbed } = require('../../utils/embeds');
+const { expandNewlines } = require('../../utils/formatters');
 const logger = require('../../utils/logger');
 const { replyWithEmbed, replyWithError } = require('../../utils/responses');
 
@@ -42,7 +43,7 @@ module.exports = {
 
   async execute(interaction) {
     const channel = interaction.options.getChannel('channel', true);
-    const message = interaction.options.getString('message', true);
+    const message = expandNewlines(interaction.options.getString('message', true));
     const allowMentions = interaction.options.getBoolean('allow_mentions') ?? false;
     const channelError = validateDestinationChannel(channel, interaction.guild.members.me);
 

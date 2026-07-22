@@ -12,6 +12,15 @@ module.exports = Object.freeze({
   errorColor: 0xef4444,
   warningColor: 0xf59e0b,
 
+  minecraftServer: Object.freeze({
+    host: '192.168.1.21',
+    port: 25565,
+    statusChannelId: '1529466775207546961',
+    checkIntervalMs: 30_000,
+    connectionTimeoutMs: 4_000,
+    offlineFailureThreshold: 2,
+  }),
+
   settings: Object.freeze({
     defaultReason: 'No reason provided.',
     maximumTimeoutMs: 28 * 24 * 60 * 60 * 1000,
@@ -20,6 +29,7 @@ module.exports = Object.freeze({
 
   paths: Object.freeze({
     projectRoot,
+    minecraftStatus: path.join(projectRoot, 'data', 'minecraft-status.json'),
     warnings: path.join(projectRoot, 'data', 'warnings.json'),
   }),
 });

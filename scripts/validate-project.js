@@ -45,8 +45,25 @@ for (const [name, value] of Object.entries({
   joinLeaveChannelId: config.joinLeaveChannelId,
   memberRoleId: config.memberRoleId,
   botRoleId: config.botRoleId,
+  minecraftStatusChannelId: config.minecraftServer.statusChannelId,
 })) {
   if (!/^\d{17,20}$/.test(value)) failures.push(`Invalid configured Discord ID: ${name}`);
+}
+
+if (!config.minecraftServer.host || typeof config.minecraftServer.host !== 'string') {
+  failures.push('Minecraft server host must be a non-empty string.');
+}
+if (!Number.isInteger(config.minecraftServer.port) || config.minecraftServer.port < 1 || config.minecraftServer.port > 65_535) {
+  failures.push('Minecraft server port must be between 1 and 65535.');
+}
+if (!Number.isInteger(config.minecraftServer.checkIntervalMs) || config.minecraftServer.checkIntervalMs < 10_000) {
+  failures.push('Minecraft check interval must be at least 10000 milliseconds.');
+}
+if (!Number.isInteger(config.minecraftServer.connectionTimeoutMs) || config.minecraftServer.connectionTimeoutMs < 1_000) {
+  failures.push('Minecraft connection timeout must be at least 1000 milliseconds.');
+}
+if (!Number.isInteger(config.minecraftServer.offlineFailureThreshold) || config.minecraftServer.offlineFailureThreshold < 1) {
+  failures.push('Minecraft offline failure threshold must be at least 1.');
 }
 
 try {
@@ -54,6 +71,15 @@ try {
   if (!Array.isArray(warningData.warnings)) failures.push('data/warnings.json must contain a warnings array.');
 } catch (error) {
   failures.push(`Could not validate data/warnings.json: ${error.message}`);
+}
+
+try {
+  const statusData = JSON.parse(fs.readFileSync(config.paths.minecraftStatus, 'utf8'));
+  if (![null, 'online', 'offline'].includes(statusData.status)) {
+    failures.push('data/minecraft-status.json contains an invalid status.');
+  }
+} catch (error) {
+  failures.push(`Could not validate data/minecraft-status.json: ${error.message}`);
 }
 
 const durationCases = { '10m': 600_000, '2h': 7_200_000, '1d': 86_400_000, '1d12h': 129_600_000 };

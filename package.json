@@ -1,7 +1,7 @@
 {
   "name": "solterra-discord-bot",
   "version": "1.0.0",
-  "description": "Production-ready Discord bot for the Solterra Minecraft community.",
+  "description": "Le plus beau de tous les bots",
   "main": "src/index.js",
   "type": "commonjs",
   "scripts": {
